@@ -18,7 +18,7 @@ spec:
         app: test2
     spec:
       containers:
-      - image: gridacr1246213.azurecr.io/grid-capstone:b6b7fa785d0b0adf01a041a4c8a76edc402487b7
+      - image: gridacr1246213.azurecr.io/grid-capstone:76c7e39d425207b378e9e18f097d340aa54cb4f6
         name: hello-world
         resources: {}
       imagePullSecrets:
