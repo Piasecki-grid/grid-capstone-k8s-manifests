@@ -19,7 +19,7 @@ spec:
         app: test2
     spec:
       containers:
-      - image: gridacr1246213.azurecr.io/grid-capstone:47630fc538cfa6d16ee8d4697192faa4cf14b848
+      - image: gridacr1246213.azurecr.io/grid-capstone:76914dbf4b5794865c4e2d5fbbea519209d3a738
         name: hello-world
         ports:
           - name: http
