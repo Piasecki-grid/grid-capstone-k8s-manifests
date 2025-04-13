@@ -6,7 +6,7 @@ metadata:
     app: test2
   name: test2
 spec:
-  replicas: 4
+  replicas: 3
   selector:
     matchLabels:
       app: test2
@@ -15,12 +15,22 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
+        monitoring: enabled
         app: test2
     spec:
       containers:
       - image: gridacr1246213.azurecr.io/grid-capstone:47630fc538cfa6d16ee8d4697192faa4cf14b848
         name: hello-world
-        resources: {}
+        ports:
+          - name: http
+            containerPort: 8080
+        resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 256Mi
+              cpu: 250m
       imagePullSecrets:
       - name: tokensecret
 status: {}

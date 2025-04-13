@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: my-podmonitor
+  namespace: monitoring
+spec:
+  podMetricsEndpoints:
+    - path: /actuator/prometheus
+      port: http
+  selector:
+    matchLabels:
+      monitoring: enabled
+  namespaceSelector:
+    any: true

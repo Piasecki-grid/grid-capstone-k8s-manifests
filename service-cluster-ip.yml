@@ -3,10 +3,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: my-grid-capstone-service
+  labels:
+    monitoring: enabled
 spec:
   ports:
     - port: 8080
       protocol: TCP
+      name: http
   type: ClusterIP
   selector:
     app: test2
