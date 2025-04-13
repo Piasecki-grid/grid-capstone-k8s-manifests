@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: my-servicemonitor
+  namespace: monitoring
+spec:
+  endpoints:
+    - path: /actuator/prometheus  
+      port: http 
+      interval: 15s  
+  selector:
+    matchLabels:
+      monitoring: enabled
+  namespaceSelector:
+    any: true

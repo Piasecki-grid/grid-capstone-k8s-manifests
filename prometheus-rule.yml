@@ -1,0 +1,43 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: test2-rules
+  namespace: monitoring  # Replace with the namespace of your kube-prometheus-stack
+  labels:
+    release: prometheus  # Match the Helm release name
+spec:
+  groups:
+    - name: test2.rules
+      rules:
+        - alert: Test2PodDown
+          expr: |
+            kube_deployment_status_replicas_available{deployment="test2"} < 3
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "All pods of deployment 'test2' are down"
+            description: "No available replicas for deployment 'test2' for more than 2 minutes."
+
+        - alert: Test2HighCPU
+          expr: |
+            sum(rate(container_cpu_usage_seconds_total{pod=~"test2-.*", container="hello-world"}[2m])) 
+            > 0.2
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High CPU usage for test2"
+            description: "The container 'hello-world' in 'test2' is using high CPU for over 5 minutes."
+
+        - alert: Test2HighMemory
+          expr: |
+            container_memory_usage_bytes{pod=~"test2-.*", container="hello-world"} 
+            > 200 * 1024 * 1024
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High memory usage for test2"
+            description: "The container 'hello-world' in 'test2' is using more than 200Mi memory."
+
